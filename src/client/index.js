@@ -1,21 +1,19 @@
 // MODULE IMPORTS
+import { validate_data } from './js/dataHandler'
+
+// DEPENDENCIES
+
+
+
+
 const form = document.querySelector('#form')
 const submit = document.querySelector('input[value=submit]')
-
 
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
 const API_KEY = process.env.API_KEY
 
-form.addEventListener('submit',handleSubmit)
-
-function handleSubmit(e){
-    e.preventDefault()
-
-    // configures form data for validation
-    let formData = new FormData(form, submit);
-
-    // FINALISES REQUEST BODY
-    let validData = validateFormData(formData);
+form.addEventListener('submit',e =>{
+    let validData = handleSubmit(e)
 
     // POST REQUEST CALL
     apiPOST(baseURL, validData)
@@ -24,30 +22,18 @@ function handleSubmit(e){
         console.log('data', data)
         serverPOST('/',validData)
     })
-}
+})
 
-// VALIDATE REQUEST BODY
-function validateFormData(d){
-    
-    d.set('verbose','y')
-    d.set('key', API_KEY)
-    d.set('lang', 'auto')
-    d.set('of', 'json')
 
-    if (d.get('txt')){
-        if (d.get('url')){
-            console.log('pick one ONLY pls')
-        } else {
-            d.delete('url')
-            return d
-        }
-    } else if (d.get('url')){
-        d.delete('txt')
-        return d
-    } else {
-        console.log('Please enter either some text or a URL')
-    }
+function handleSubmit(e){
+    e.preventDefault()
+    // configures form data for validation
+    let formData = new FormData(form, submit);
 
+    // FINALISES REQUEST BODY
+    let validData = Mod.validate_data(formData, API_KEY);
+
+    return validData
 }
 
 

@@ -8,6 +8,10 @@ module.exports = {
     devtool: 'source-map',
     mode: 'development',
     stats: 'verbose',
+    output: {
+        libraryTarget: 'var',
+        library: 'Mod'
+    },
     module: {
         rules: [
             {
@@ -36,9 +40,5 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         })
-    ],
-    output: {
-        libraryTarget: 'var',
-        library: 'mod'
-    }
+    ]
 }

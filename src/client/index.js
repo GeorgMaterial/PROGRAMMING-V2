@@ -3,6 +3,10 @@ import { validate_data } from './js/dataHandler'
 
 // DEPENDENCIES
 
+const dotenv = require('dotenv')
+dotenv.config()
+
+const api = { application_key: process.env.API_KEY }
 
 
 
@@ -10,7 +14,7 @@ const form = document.querySelector('#form')
 const submit = document.querySelector('input[value=submit]')
 
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
-const API_KEY = process.env.API_KEY
+const API_KEY = api.application_key
 
 form.addEventListener('submit',e =>{
     let validData = handleSubmit(e)

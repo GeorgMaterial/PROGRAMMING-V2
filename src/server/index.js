@@ -1,12 +1,5 @@
 const path = require('path')
 const express = require('express')
-const dotenv = require('dotenv')
-const { application } = require('express')
-dotenv.configure()
-
-const textapi = new API({
-    application_key: process.env.API_KEY
-})
 
 const app = express()
 

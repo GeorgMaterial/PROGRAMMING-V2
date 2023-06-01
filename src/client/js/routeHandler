@@ -1,0 +1,17 @@
+const apiPOST = async( url='', data={} ) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: data
+    });
+
+    try {
+        const newData = await response.json()
+        return newData;
+    } catch(error) {
+        console.log('error', response)
+        console.log('error', error)
+    }
+}
+
+export { apiPOST }

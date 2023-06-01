@@ -1,94 +1,41 @@
-// MODULE IMPORTS
-import { validate_data } from './js/dataHandler'
-
-// DEPENDENCIES
-
-const dotenv = require('dotenv')
-dotenv.config()
-
-const api = { application_key: process.env.API_KEY }
+// MODULE IMPORTS //
+import { 
+    handleSubmit,
+    processResponse
+} from './js/dataHandler'
+import { displayResults } from './js/dynamicDisplay.js'
+import { apiPOST } from './js/routeHandler';
 
 
 
 const form = document.querySelector('#form')
-const submit = document.querySelector('input[value=submit]')
 
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
-const API_KEY = api.application_key
 
 form.addEventListener('submit',e =>{
-    let validData = handleSubmit(e)
+    let query = handleSubmit(e)
 
     // POST REQUEST CALL
-    apiPOST(baseURL, validData)
+    apiPOST(baseURL, query)
 
     .then(function(data){
-        console.log('data', data)
-        serverPOST('/',validData)
+        if (data.status.code != '200'){
+            console.log('error', data.status)
+        } else {
+        processResponse(data)
+        }
     })
 })
 
-
-function handleSubmit(e){
-    e.preventDefault()
-    // configures form data for validation
-    let formData = new FormData(form, submit);
-
-    // FINALISES REQUEST BODY
-    let validData = Mod.validate_data(formData, API_KEY);
-
-    return validData
+export {
+    displayResults
 }
 
 
-// POST REQUEST
-const apiPOST = async( url='', data={} ) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        body: data
-    });
 
-    try {
-        const newData = await response.json()
-        return newData;
-    } catch(error) {
-        console.log('error', response)
-        console.log('error', error)
-    }
-}
 
-// POST TO SERVER
-const serverPOST = async( url='', data={} ) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    try {
-        const newData = await response.json()
-        return newData;
-    } catch(error) {
-        console.log('error', response)
-        console.log('error', error)
-    }
-}
-
-// API REQUEST ?????
-const apiRequest = async (url, data) => {
-    const request = await fetch(url);
-
-    try {
-        const allData = await request.json();
-        return allData ;
-    } catch (error) {
-        console.log("error", error);
-    }
-}
-
-// AFTER PRESSING SUBMIT
-
+// press submit
+// POST request to API
+// receive response
+// handle response
+// display response

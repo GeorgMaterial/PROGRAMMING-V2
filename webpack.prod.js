@@ -10,6 +10,11 @@ module.exports = {
     entry: './src/client/index.js',
     devtool: 'source-map',
     mode: 'production',
+    output: {
+        path: path.resolve(process.cwd(), 'dist'),
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
@@ -47,9 +52,5 @@ module.exports = {
             new TerserPlugin({}),
             new OptimizeCSSAssetsPlugin({})
         ]
-    },
-    output: {
-        libraryTarget: 'var',
-        library: 'mod'
     }
 }

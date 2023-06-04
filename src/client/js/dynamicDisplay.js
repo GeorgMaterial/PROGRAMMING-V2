@@ -24,8 +24,24 @@ function displayResults(data, snippet, inputType){
     visualData = snippetStr.concat(visualData)
 
     resultDiv.innerHTML = visualData
+    formToggle()
+}
+
+function formToggle(){
+    const form = document.getElementById('form');
+    const button = document.getElementById('toggle')
+    if (form.hidden){
+        form.hidden = false;
+        button.innerText = 'Hide Form'
+        console.log('not hidden anymore')
+    } else {
+        form.hidden = true;
+        button.innerText = 'Show Form'
+        console.log('attribute added')
+    }
 }
 
 export {
-    displayResults
+    displayResults,
+    formToggle
 }

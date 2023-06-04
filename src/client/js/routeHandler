@@ -9,9 +9,20 @@ const apiPOST = async( url='', data={} ) => {
         const newData = await response.json()
         return newData;
     } catch(error) {
-        console.log('error', response)
-        console.log('error', error)
+        console.log('apiPost error', response)
+        console.log('apiPost error', error)
     }
 }
 
-export { apiPOST }
+const getKey = async _ => { 
+    let req = await fetch ('http://localhost:8000/key')
+
+    try {
+        const res = await req.json()
+        return res.api  
+    } catch ( error ){
+        console.log(error, 'getKey error')
+    }
+}
+
+export { apiPOST, getKey }

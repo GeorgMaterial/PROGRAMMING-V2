@@ -1,0 +1,77 @@
+@use "sass:math";
+
+// VARIABLE DEFINITIONS //
+$test-bdr: 1px solid black;
+$base_text_size: 1em;
+
+// MIXINS //
+@mixin font-ratio($multiplier: 1){
+    letter-spacing: ($base_text_size * $multiplier) * 0.1;
+    font-size: $base_text_size * $multiplier;
+}
+
+@mixin m-p-w($margin: 1, $padding: 1, $width: 1){
+    width: 100% * $width;
+    margin: 10px * $margin;
+    padding: 10px * $padding;
+}
+
+// BASE ALIGNMENT //
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 2;
+    margin-bottom: 50px;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    // border: $test-bdr;
+    align-items: center;
+    justify-content: center;
+}
+
+// FONT STYLING //
+
+*{
+    font-family: Helvetica, Arial, sans-serif;
+    @include font-ratio;
+}
+
+h1 {
+    @include font-ratio(3);
+}
+
+h2 {
+    @include font-ratio(2);
+}
+
+h3 {
+    @include font-ratio(1.5);
+}
+
+.snippet-head {
+    @include font-ratio(1.2);
+    font-weight:800;
+}
+
+label {
+    @include font-ratio(1.1);
+
+}
+
+// FORM TOGGLE STYLING //
+
+#toggle {
+    border: none;
+    @include m-p-w(1,1.5,1);
+    margin-top: 0;
+}

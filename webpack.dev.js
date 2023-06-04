@@ -42,7 +42,9 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new dotenv({})
+        new dotenv({
+            systemVars: true
+        })
     ],
     resolve: {
         fallback: { "os": require.resolve("os-browserify/browser") }

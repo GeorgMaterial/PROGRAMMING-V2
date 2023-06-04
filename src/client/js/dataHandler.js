@@ -1,4 +1,8 @@
 var inputType = ''
+const inputFields = document.querySelectorAll('.validate')
+const errorMsg = document.getElementById('input-error')
+
+
 
 function validate_data(formData, key){
 
@@ -13,7 +17,7 @@ function validate_data(formData, key){
     // VALIDATE INPUT -- TEXT OR URL BUT NOT BOTH OR NEITHER
     if (formData.get('txt')){
         if (formData.get('url')){
-            console.log('pick one ONLY pls')
+            Client.error('on','Cannot submit Text and URL for analysis. Pick one and try again.')
         } else {
             formData.delete('url')
             inputType = 'txt'
@@ -25,14 +29,13 @@ function validate_data(formData, key){
         return formData
     } else {
         // INSERT ERROR HANDLER
-        console.log('Please enter either some text or a URL')
+        Client.error('on','Cannot submit empty text. Please enter either some text or a URL and try again.')
     }
 
 }
 
-function handleSubmit(e){
-    e.preventDefault()
-
+function handleSubmit(e, key){
+    
     const form = document.querySelector('#form')
     const submit = document.querySelector('input[value=submit]')
 
@@ -40,24 +43,14 @@ function handleSubmit(e){
     let formData = new FormData(form, submit);
     
     // FINALISES REQUEST BODY
-    let validData = validate_data(formData, Client.api);
+    let validData = validate_data(formData, key);
 
-    console.log('validData', validData)
+    
     return validData
 }
 
 // PROCESS API RESPONSE TO BE READABLE ON SITE
-async function processResponse(data){
-    console.log('processResponse', data)
-    let processed_data = await matchDefinitions(data)
-
-    
-}
-
-
-
-
-function matchDefinitions(data){
+function processResponse(data){
     let dataObj = []
     // RESULT DEFINITIONS FROM API DOCS
     const definitions = {
@@ -95,11 +88,10 @@ function matchDefinitions(data){
     let sentences = []
     for (let item of data.sentence_list){
         sentences.push(item.text)
-        if (data.sentence_list.indexOf(item) > 5){
+        if (data.sentence_list.indexOf(item) >= 4){
             break
         }
     }
-    console.log(sentences)
     const snippet = sentences.join(' ')
 
     Client.displayResults(dataObj, snippet, inputType)

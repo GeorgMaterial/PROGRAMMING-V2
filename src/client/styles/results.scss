@@ -1,0 +1,52 @@
+// VARIABLE DEF //
+$bg_one: pink;
+$bg_two: white;
+
+@mixin pad_n_border($padding: 1, $radius: 1, $bg: none){
+    padding: 1px * $padding;
+    border-radius: 1px * $radius;
+    background-color: $bg;
+}
+
+#results {
+    width: 90vw;
+    @include pad_n_border(25, 10, $bg_one);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    
+
+    div {
+        width: 40%;
+
+        .snippet-head{
+            @include pad_n_border(10,5);
+
+        }
+    
+        .snippet-text{
+            box-sizing: border-box;
+            @include pad_n_border(18,5, $bg_two);
+            max-height: 15vh;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+    }
+
+    ul{
+        width: 40%;
+
+        li{
+            list-style: none;
+            padding: 5px;
+
+            strong{
+                text-transform: uppercase;
+                @include pad_n_border(3,0 ,aqua ) ;
+                
+            }
+        }
+    }
+    
+}

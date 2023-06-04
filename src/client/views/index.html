@@ -8,25 +8,31 @@
     <body>
 
         <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
+            <h1>A fake website name</h1>
+            <nav class="nav">
+                <p>dummy</p>
+                <p>dummy</p>
+                <p>dummy</p>
+            </nav>
         </header>
 
         <main>
             <section>
+                <h2>Let's analyse some words!</h2>
                 <form id="form" >
-                    <input id="text" type="text" name="txt" value="" placeholder="Text">
-                    <input id="url" type="text" name="url" value="" placeholder="URL">
-                    <input type="submit" name="" value="submit" >
+                    <label class="label" for="txt">Enter some text to be analysed:</label>
+                    <textarea id="text" class='validate input' form="form" name="txt" value="" placeholder="Type here..."></textarea>
+                    <label class="label" for="url">Paste a link to a webpage you'd like to analyse:</label>
+                    <input id="url" class='validate input' type="text" name="url" value="" placeholder="URL">
+                    <input type="submit" name="" value="submit">
+                    <div id="input-error" class='validate'></div>
                 </form>
+                
+                <button id="toggle" onclick="return Client.formToggle()">Toggle Input</button>
             </section>
 
             <section>
-                <strong>Form Results:</strong>
+                <h3>Form Results:</h3>
                 <div id="results"></div>
             </section>
         </main>

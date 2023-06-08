@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const dotenv = require('dotenv-webpack')
 
 module.exports = {
@@ -49,6 +50,9 @@ module.exports = {
         }),
         new dotenv({
             systemVars: true
+        }),
+        new WorkboxPlugin.GenerateSW({
+            swDest: './dist/service-worker.js'
         })
     ],
     optimization: {

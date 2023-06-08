@@ -1,4 +1,7 @@
+
+
 const apiPOST = async( url='', data={} ) => {
+    console.log('api post')
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -10,12 +13,13 @@ const apiPOST = async( url='', data={} ) => {
         return newData;
     } catch(error) {
         console.log('apiPost error', response)
-        console.log('apiPost error', error)
+        console.log('apiPost error', error) 
     }
 }
 
-const getKey = async _ => { 
-    let req = await fetch ('http://localhost:8000/key')
+const getKey = async url => { 
+    console.log('get key')
+    let req = await fetch('http://localhost:8000/key')
 
     try {
         const res = await req.json()

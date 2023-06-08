@@ -1,11 +1,8 @@
 var inputType = ''
-const inputFields = document.querySelectorAll('.validate')
-const errorMsg = document.getElementById('input-error')
-
 
 
 function validate_data(formData, key){
-
+    
     // CREATES QUERY BODY FOR API REQUEST
     
     formData.set('verbose','y')  // TOGGLE ADDITIONAL INFORMATION
@@ -36,6 +33,7 @@ function validate_data(formData, key){
 
 function handleSubmit(e, key){
     
+    
     const form = document.querySelector('#form')
     const submit = document.querySelector('input[value=submit]')
 
@@ -51,6 +49,7 @@ function handleSubmit(e, key){
 
 // PROCESS API RESPONSE TO BE READABLE ON SITE
 function processResponse(data){
+    
     let dataObj = []
     // RESULT DEFINITIONS FROM API DOCS
     const definitions = {
@@ -94,12 +93,21 @@ function processResponse(data){
     }
     const snippet = sentences.join(' ')
 
-    Client.displayResults(dataObj, snippet, inputType)
+    const returnObj = {
+        "data": dataObj,
+        "snippet": snippet,
+        "inputType": inputType
+    }
+
+    return returnObj
+
+    // Client.displayResults(dataObj, snippet, inputType)
 }
 
 
 export {
     handleSubmit,
-    processResponse
+    processResponse,
+    validate_data
 }
 

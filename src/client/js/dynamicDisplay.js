@@ -1,7 +1,7 @@
-function displayResults(data, snippet, inputType){
-
+function displayResults({data: data=[], snippet: snippet="", inputType: inputType="" }){
+    
     // CONFIGURING HOW THE DATA DISPLAYS ON SITE
-    const resultDiv = document.getElementById('results')
+    // const resultDiv = document.getElementById('results')
 
     // VISUALISING DATA OBJECT
     let array = ["<ul>"]
@@ -23,11 +23,14 @@ function displayResults(data, snippet, inputType){
 
     visualData = snippetStr.concat(visualData)
 
-    resultDiv.innerHTML = visualData
-    formToggle()
+    
+    return visualData
+    // resultDiv.innerHTML = visualData
+    // formToggle()
 }
 
 function formToggle(){
+    
     const form = document.getElementById('form');
     const button = document.getElementById('toggle')
     if (form.hidden){
